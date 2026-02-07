@@ -1,0 +1,18 @@
+# config_selfinfluence.yaml
+
+data_dir: /srv/xw4e25/Data/fbanks_83
+model_base_path: /srv/xw4e25/dysarthria_explanation/models/fbanks_83_severity
+task: severity
+dim: 80
+n_splits: 5
+random_state: 42
+fold_idx: 1
+
+# Self-influence模式
+mode: self_influence
+
+# Checkpoint配置
+checkpoint_epochs: [6, 12, 18, 24, 30]
+
+device: cuda
+output_dir: ./tracin_results/selfinfluence_fold1

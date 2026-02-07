@@ -1,0 +1,14 @@
+# 忽略数据
+data/
+
+# 忽略输出
+models/
+tracin_results/
+
+# Python 缓存
+__pycache__/
+*.pyc
+
+# 训练模型
+*.pt
+*.pth

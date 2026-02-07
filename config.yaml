@@ -1,0 +1,20 @@
+# 数据路径
+data_dir: /srv/xw4e25/Data/fbanks_83
+
+# 模型路径
+model_base_path: /srv/xw4e25/dysarthria_explanation/models/fbanks_83_severity
+
+# 实验配置
+task: severity  # severity, dysarthria, multitask
+dim: 80
+n_splits: 5
+random_state: 42
+
+# TracIn配置
+fold_idx: 1
+total_epochs: 1
+device: cuda
+batch_size: 128
+
+# 输出路径
+output_dir: ./tracin_results

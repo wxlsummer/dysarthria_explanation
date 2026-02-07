@@ -1,0 +1,27 @@
+# 数据路径
+data_dir: /srv/xw4e25/Data/fbanks_83
+
+# 模型路径
+model_base_path: /srv/xw4e25/dysarthria_explanation/models/fbanks_83_severity
+
+# 基本配置
+task: severity
+dim: 80
+n_splits: 5
+random_state: 42
+fold_idx: 1
+
+# 模式配置
+mode: data_cleaning
+n_test_samples: 3518
+sampling_strategy: proportional
+
+# Checkpoint配置
+checkpoint_epochs: [6, 12, 18, 24, 30]
+#checkpoint_epochs: [24, 30]
+
+# 硬件配置
+device: cuda
+
+# 输出路径
+output_dir: ./tracin_results/datacleaning_fold1_3000
