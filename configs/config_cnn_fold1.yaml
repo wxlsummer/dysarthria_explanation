@@ -1,0 +1,42 @@
+# =============================================================================
+# config_cnn_fold1.yaml — SeverityCNN training config
+#
+# Model  : SeverityCNN  (2-layer Conv1D on frequency axis, see cnn_model.py)
+# Task   : severity — 4-class ordinal classification
+#            0 = mild   1 = moderate   2 = severe   3 = typical(control)
+#            (matches severity_mapping in torgo_dataloaders.py)
+# Data   : TORGO, 80-dim FBank features (.npy, mean-pooled per utterance)
+# =============================================================================
+
+# ── Data ─────────────────────────────────────────────────────────────────────
+data_dir: /srv/xw4e25/Data/torgo_fbanks_83
+
+# ── Cross-validation ─────────────────────────────────────────────────────────
+# CRITICAL: these three values must be identical to the MLP pipeline so that
+# fold 1 here is exactly the same train/test split as fold 1 in tracin_main.py
+n_splits:     5
+random_state: 42
+
+# Which folds to train. [1] = fold 1 only.
+# Change to [1,2,3,4,5] to run all folds.
+folds: [1]
+
+# ── Model ────────────────────────────────────────────────────────────────────
+dim: 80                 # FBank feature dimension (must match data)
+
+# ── Training ─────────────────────────────────────────────────────────────────
+epochs:        30           # one checkpoint saved per epoch → 30 files total
+batch_size:    32
+learning_rate: 0.0003       # AdamW learning rate  (matches paper)
+
+# ── Hardware ─────────────────────────────────────────────────────────────────
+device: cuda:2
+
+# ── Checkpoint output ────────────────────────────────────────────────────────
+# Saved as: {ckpt_root}/fold_{N}/epoch_{E:03d}.pth
+# To run TracIn on these checkpoints, set in your tracin config:
+#   model_base_path: /srv/xw4e25/dysarthria_explanation/models/fbanks_83_severity_cnn_1d
+ckpt_root: ./models/fbanks_83_severity_cnn_1d
+
+# Label stored inside each checkpoint (informational)
+feature: fbanks_83
